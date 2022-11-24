@@ -16,6 +16,9 @@ namespace CLIsploit
         {
             [Option("api", Required = true, HelpText = "Specify which exploit API you want to use")]
             public string api { get; set; }
+
+            [Option('p', "scriptpath", Required = true, HelpText = "Specify the path of the script you want to use")]
+            public string scriptPath { get; set; }
         }
 
         static void DisplayHelp<T>(ParserResult<T> result, IEnumerable<Error> errs)
