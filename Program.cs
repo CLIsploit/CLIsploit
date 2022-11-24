@@ -12,6 +12,8 @@ namespace CLIsploit
 {
     internal class Program
     {
+        static KrnlApi _krnlApi = new KrnlApi();
+
         public class Options
         {
             [Option("api", Required = true, HelpText = "Specify which exploit API you want to use")]
@@ -42,6 +44,8 @@ namespace CLIsploit
 
         static void Main(string[] args)
         {
+            _krnlApi.Initialize();
+
             var parser = new CommandLine.Parser(with => with.HelpWriter = null);
             var parserResult = parser.ParseArguments<Options>(args);
             parserResult
@@ -49,8 +53,27 @@ namespace CLIsploit
                 .WithNotParsed(errs => DisplayHelp(parserResult, errs));
         }
 
-        public static void Run(Options options) {}
+        public static void Run(Options options)
+        {
+            // inject exploit api
+            switch (options.Api)
+            {
+                case "krnl":
+                    KrnlInject();
+                    break;
+            }
+        }
 
-        public static void Inject(string api) {}
+        public static void KrnlInject()
+        {
+            if (_krnlApi.IsInitialized())
+            {
+                if (!_krnlApi.IsInjected())
+                {
+                    _krnlApi.Inject();
+                    Console.WriteLine("Injected Krnl API!");
+                }
+            }
+        }
     }
 }
