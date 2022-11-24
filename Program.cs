@@ -18,7 +18,7 @@ namespace CLIsploit
 
         public class Options
         {
-            [Option("api", Required = true, HelpText = "Specify which exploit API you want to use")]
+            [Option("api", Required = false, HelpText = "Specify which exploit API you want to use")]
             public string Api { get; set; }
 
             [Option("customapi", Required = false, HelpText = "Specify the path of a custom exploit API you want to use")]
