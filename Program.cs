@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using WeAreDevs_API;
 using System.Diagnostics;
+using System.IO;
 
 namespace CLIsploit
 {
@@ -57,15 +58,33 @@ namespace CLIsploit
 
         public static void Run(Options options)
         {
-            // inject exploit api
-            switch (options.Api)
+            if (options.Api != null)
             {
-                case "krnl":
-                    KrnlInject();
-                    break;
-                case "wrd":
-                    WrdInject();
-                    break;
+                // inject exploit api
+                switch (options.Api)
+                {
+                    case "krnl":
+                        KrnlInject();
+                        break;
+                    case "wrd":
+                        WrdInject();
+                        break;
+                }
+            }
+            else if (options.ScriptPath != null)
+            {
+                string script = File.ReadAllText(options.ScriptPath);
+
+                if (_krnlApi.IsInjected())
+                {
+                    _krnlApi.Execute(script);
+                    Console.WriteLine("Executed script with Krnl API!");
+                }
+                else if (_wrdApi.isAPIAttached())
+                {
+                    _wrdApi.SendLuaScript(script);
+                    Console.WriteLine("Executed script with WRD API!");
+                }
             }
         }
 
