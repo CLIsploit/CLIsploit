@@ -3,6 +3,8 @@
 
 using CommandLine;
 using CommandLine.Text;
+using KrnlAPI;
+using WeAreDevs_API;
 
 namespace CLIsploit
 {
