@@ -74,6 +74,11 @@ namespace CLIsploit
                 Console.WriteLine("ROBLOX isn't running! Please open ROBLOX and try again!");
             }
 
+            if (_krnlApi.IsInjected())
+            {
+                Console.WriteLine("Krnl is already injected! Execute some scripts!");
+            }
+
             if (IsRobloxRunning())
             {
                 if (_krnlApi.IsInitialized())
