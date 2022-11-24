@@ -15,10 +15,13 @@ namespace CLIsploit
         public class Options
         {
             [Option("api", Required = true, HelpText = "Specify which exploit API you want to use")]
-            public string api { get; set; }
+            public string Api { get; set; }
+
+            [Option("customapi", Required = false, HelpText = "Specify the path of a custom exploit API you want to use")]
+            public string CustomApi { get; set; }
 
             [Option('p', "scriptpath", Required = true, HelpText = "Specify the path of the script you want to use")]
-            public string scriptPath { get; set; }
+            public string ScriptPath { get; set; }
         }
 
         static void DisplayHelp<T>(ParserResult<T> result, IEnumerable<Error> errs)
