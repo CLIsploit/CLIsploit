@@ -14,6 +14,7 @@ namespace CLIsploit
     internal class Program
     {
         static KrnlApi _krnlApi = new KrnlApi();
+        static ExploitAPI _wrdApi = new ExploitAPI();
 
         public class Options
         {
@@ -62,6 +63,9 @@ namespace CLIsploit
                 case "krnl":
                     KrnlInject();
                     break;
+                case "wrd":
+                    WrdInject();
+                    break;
             }
         }
 
@@ -88,6 +92,30 @@ namespace CLIsploit
                         _krnlApi.Inject();
                         Console.WriteLine("Injecting Krnl API...");
                     }
+                }
+            }
+        }
+
+        public static void WrdInject()
+        {
+            // if statement hell
+
+            if (!IsRobloxRunning())
+            {
+                Console.WriteLine("ROBLOX isn't running! Please open ROBLOX and try again!");
+            }
+
+            if (_wrdApi.isAPIAttached())
+            {
+                Console.WriteLine("WRD is already injected! Execute some scripts!");
+            }
+
+            if (IsRobloxRunning())
+            {
+                if (!_wrdApi.isAPIAttached())
+                {
+                    _wrdApi.LaunchExploit();
+                    Console.WriteLine("Injecting WRD API...");
                 }
             }
         }
