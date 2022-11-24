@@ -7,6 +7,7 @@ using KrnlAPI;
 using System.Collections.Generic;
 using System;
 using WeAreDevs_API;
+using System.Diagnostics;
 
 namespace CLIsploit
 {
@@ -22,7 +23,7 @@ namespace CLIsploit
             [Option("customapi", Required = false, HelpText = "Specify the path of a custom exploit API you want to use")]
             public string CustomApi { get; set; }
 
-            [Option('p', "scriptpath", Required = true, HelpText = "Specify the path of the script you want to use")]
+            [Option('p', "scriptpath", Required = false, HelpText = "Specify the path of the script you want to use")]
             public string ScriptPath { get; set; }
         }
 
@@ -66,14 +67,36 @@ namespace CLIsploit
 
         public static void KrnlInject()
         {
-            if (_krnlApi.IsInitialized())
+            // if statement hell
+
+            if (!IsRobloxRunning())
             {
-                if (!_krnlApi.IsInjected())
+                Console.WriteLine("ROBLOX isn't running! Please open ROBLOX and try again!");
+            }
+
+            if (IsRobloxRunning())
+            {
+                if (_krnlApi.IsInitialized())
                 {
-                    _krnlApi.Inject();
-                    Console.WriteLine("Injected Krnl API!");
+                    if (!_krnlApi.IsInjected())
+                    {
+                        _krnlApi.Inject();
+                        Console.WriteLine("Injecting Krnl API...");
+                    }
                 }
             }
+        }
+
+        public static bool IsRobloxRunning()
+        {
+            Process[] name = Process.GetProcessesByName("RobloxPlayerBeta");
+
+            if (name.Length == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
