@@ -22,9 +22,6 @@ namespace CLIsploit
             [Option("api", Required = false, HelpText = "Specify which exploit API you want to use")]
             public string Api { get; set; }
 
-            [Option("customapi", Required = false, HelpText = "Specify the path of a custom exploit API you want to use")]
-            public string CustomApi { get; set; }
-
             [Option('p', "scriptpath", Required = false, HelpText = "Specify the path of the script you want to use")]
             public string ScriptPath { get; set; }
         }
